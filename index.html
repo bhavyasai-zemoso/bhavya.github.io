@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <title>My Home Page</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+    <h1>
+        Welcome To My Page
+    </h1>
+    <button class="tablink" onclick="openPage('home',this)" id="defaultOpen">Home</button>
+    <button class="tablink" onclick="openPage('about_me',this)" >About me</button>
+    <button class="tablink" onclick="openPage('contact_me',this)">Contact me  </button>
+    <button class="tablink" onclick="openPage('gallery',this)" >Gallery</button>
+ 
+    <div id="home" class="tabcontent">
+   
+        <p> <br><br>My name is Bhavya Sai Survepalli <br><br> Welcome to my Homepage.</p>
+    </div>
+    <div id="about_me" class="tabcontent">
+        <h3>About me</h3>
+        <h4>Introduction</h4>
+        <p class="indentation"> I am  <strong>Bhavya Sai Survepalli</strong> currently working in <strong>Zemoso Technologies</strong> as Associate Software engineer.</p>
+        <h4>Technical Abilites & Skills</h4>
+        <p>
+          <ul>
+            <li>Working knowledge of Java, Html, Css, Javascript, Sql. , Unix Shell Scripting</li>
+            <li>Working knowledge of different repositories like Github,BitBucket</li>
+          </ul>
+        </p>
+        <h4>Professional Experience</h4>
+        <p class="indentation"> I have a professional experience of 1.5 year</p>
+    </div>
+    <div id="contact_me" class="tabcontent">
+        <div class="container">
+            <form name="contactForm" methid="post" onsubmit="return validateForm()">
+                <label for="fname">Full Name</label>
+                <input type="text" id="fname" name="fullName" placeholder="Please enter your full name">
+                <label for="mobile">Mobile Number</label>
+                <input type="text" id="mobile" name="mobile" placeholder="Please enter you mobile number">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="emailAddress" placeholder="Your email details">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <div id="gallery" class="tabcontent">
+            <h1>My Gallery</h1>
+            <p></p>
+        <div class="row">
+            <div class="column">
+                <img src="bhavya.jpg">
+            </div>
+	    <div class="column">
+                <img src="bhavya.jpg">
+	    </div>
+		<div class="column">
+                <img src="bhavya.jpg">
+	    </div>
+        </div>
+    </div>
+    <script>document.getElementById("defaultOpen").click();</script>
+  </body>
+</html>
