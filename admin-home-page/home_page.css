@@ -1,0 +1,114 @@
+body {
+    background: #f8f9fa;
+}
+
+.absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.nav {
+    margin: 1em 0;
+    justify-content: space-evenly;
+}
+
+.welcome-home {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+   /* align-items: top;
+    height: 50vh;*/
+}
+
+.about {
+    margin: 0 1em;
+    margin-top: 5em;
+}
+
+.flex-col {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-col hr {
+    width: 50vw;
+}
+
+.flex-col button {
+    margin-bottom: 0.7em;
+}
+
+
+.flex-col span {
+    position: relative;
+    padding: 0 1em;
+    margin-top: -1.7em;
+    color: #b3d7ff;
+    background-color: #f8f9fa;
+}
+
+.flex-col h6 {
+    margin: 0.7em 0
+}
+
+.no-images {
+    text-align: center;
+    color: indianred;
+}
+
+.form {
+    margin: 0 1em;
+    margin-top: 8em;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    margin-bottom: 1em;
+}
+
+.custom-modal-body {
+    text-align: center;
+}
+
+.custom-modal-footer {
+    justify-content: center
+}
+
+.media div h5 {
+    font-weight: bold;
+}
+
+.media div p {
+    font-family: Times New Roman, Georgia, serif;
+}
+
+.about h2 {
+    font-weight: bold;
+    font-family: Times New Roman, Georgia, serif;
+}
+.carousel-inner { 
+    width: 100%;
+    padding: 300px;
+    top : -350px;
+    height : 10px;
+    /*margin-left: 50px;
+    margin-right: auto;*/
+ }
+ #carousel-example-1z{
+    height: 40vh;
+ }
+ .d-block{
+    margin-block-start: -65px;
+ }
+ .carousel-indicators{
+    margin-top : -50px;
+ }
