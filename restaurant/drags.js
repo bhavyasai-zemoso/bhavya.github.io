@@ -25,7 +25,6 @@ function dragStart(event) {
     event.dataTransfer.effectAllowed='move';
       event.dataTransfer.setData("text", event.target.id);
       event.dataTransfer.setDragImage(event.target,0,0);
-      return true;
 }, false);
   element.addEventListener("touchend", function(event,i) {
     var src = event.dataTransfer.getData("text");
@@ -33,10 +32,8 @@ function dragStart(event) {
     addItem(item[src],i);
     showTables();
     event.stopPropagation();
-    return false;
  }, false);
   element.addEventListener("touchcancel", function(event){
-    return false;
 }, false);
   element.addEventListener("touchleave", function(event,i) {
     var src = event.dataTransfer.getData("text");
@@ -44,10 +41,8 @@ function dragStart(event) {
     addItem(item[src],i);
     showTables();
     event.stopPropagation();
-    return false;
  }, false);
   element.addEventListener("touchmove", function(event){
-    return ;
 }, false);
 
  function addItem(item,i){
