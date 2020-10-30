@@ -60,10 +60,10 @@ function dragStart(event) {
         }
         oldItems.push(newItem1);
         localStorage.setItem('table-'+i+'',JSON.stringify(oldItems)); 
-        var data=JSON.parse(localStorage.getItem(""+i+"-data"));
+        var data=JSON.parse(localStorage.getItem("foodItem-"+i+""));
         data[0].count+=1;
         data[0].bill+=parseFloat(item.price);
-        localStorage.setItem(""+i+"-data",JSON.stringify(data));
+        localStorage.setItem("foodItem-"+i+"",JSON.stringify(data));
 
      }
      else{
@@ -81,7 +81,7 @@ function dragStart(event) {
                   break;
               }
             }
-            var data=JSON.parse(localStorage.getItem(""+i+"-data"));
+            var data=JSON.parse(localStorage.getItem("foodItem-"+i+""));
               if(flag==0){
                 oldItems1.push(newItem);
                 data[0].count+=1;
@@ -89,6 +89,6 @@ function dragStart(event) {
             localStorage.removeItem('table-'+i+'');
             localStorage.setItem('table-'+i+'',JSON.stringify(oldItems1));
             data[0].bill+=parseFloat(item.price);
-            localStorage.setItem(""+i+"-data",JSON.stringify(data));
+            localStorage.setItem("foodItem-"+i+"",JSON.stringify(data));
      }   
  }
