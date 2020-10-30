@@ -7,11 +7,11 @@ $(function() {
             localStorage.setItem("gallery", JSON.stringify(data));
         });
     } else {
-        galleryObject = JSON.parse(localStorage.getItem("gallery"));
-        
+        galleryObject = JSON.parse(localStorage.getItem("gallery"));        
     }
     galleryObject = galleryObject && galleryObject.gallery ? galleryObject.gallery : null;
-    readGallery();
+    createGallery();
+
 });
 
 function getDivWithClass(className) {
@@ -20,32 +20,34 @@ function getDivWithClass(className) {
     return div;
 }
 
-function readGallery() {
+function createGallery() {
     const gallery_holder = document.getElementById("images_placeholder");
     if (!galleryObject || galleryObject.length == 0) {
-        gallery_holder.innerHTML = `<h1 class="no-images">No Images in Gallery</h1>`;
+        gallery_holder.innerHTML = `<h5 class="no-images">No Images in Gallery to Edit</h5>`;
         return;
     }
 
-    
-    let innerObj = getDivWithClass("row");
+    let rowElement = getDivWithClass("row");
     galleryObject.forEach(element => {
-        let colChild = getDivWithClass("col-md-4");
-        let cardObj = getDivWithClass("card");
-        cardObj.id = element.id;
-        let imgObj = document.createElement("img");
-        imgObj.src = element.url;
-        imgObj.className = "card-img-top";
-        imgObj.alt = element.name;
-        cardObj.appendChild(imgObj);
-        let cardBodyObj = getDivWithClass("card-body");
-        let cardBodyTextObj = getDivWithClass("card-text");
-        cardBodyTextObj.textContent = element.information;
-        cardBodyObj.appendChild(cardBodyTextObj);
-        cardObj.appendChild(cardBodyObj);
-        colChild.appendChild(cardObj);
-        innerObj.appendChild(colChild);
+        let columnElement = getDivWithClass("col-md-4");
+        let cardMain = getDivWithClass("card");
+        cardMain.id = element.id;
+        let cardImage = document.createElement("img");
+        cardImage.src = element.url;
+        cardImage.className = "card-img-top";
+        cardImage.alt = element.name;
+        cardMain.appendChild(cardImage);
+        let cardBody = getDivWithClass("card-body");
+        let cardBodyText = document.createElement("p");
+        cardBodyText.className = "card-text";
+        cardBodyText.textContent = element.information;
+        cardBody.appendChild(cardBodyText);
+        cardMain.appendChild(cardBody);
+        columnElement.appendChild(cardMain);
+        rowElement.appendChild(columnElement);
     });
- 
-    gallery_holder.appendChild(innerObj);
+    gallery_holder.appendChild(rowElement);
 }
+
+
+

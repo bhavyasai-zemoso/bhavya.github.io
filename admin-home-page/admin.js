@@ -10,7 +10,7 @@ $(function() {
         galleryObject = JSON.parse(localStorage.getItem("gallery"));        
     }
     galleryObject = galleryObject && galleryObject.gallery ? galleryObject.gallery : null;
-    readGallery();
+    createGallery();
 
 });
 
@@ -20,57 +20,57 @@ function getDivWithClass(className) {
     return div;
 }
 
-function getButtonWithNameAndAttrs(name, attrObj) {
+function getButton(name, attributes) {
     let button = document.createElement("button");
-    for (const [key, value] of Object.entries(attrObj)) {
+    for (const [key, value] of Object.entries(attributes)) {
         button.setAttribute(key, value);
     }
     button.textContent = name;
     return button;
 }
 
-function readGallery() {
+function createGallery() {
     const gallery_holder = document.getElementById("images_placeholder");
     if (!galleryObject || galleryObject.length == 0) {
-        gallery_holder.innerHTML = `<h5 class="no-images">No Images in Gallery to Edit</h5>`;
+        gallery_holder.innerHTML = `<h1 class="no-images">No Images in Gallery to Edit</h1>`;
         return;
     }
 
-    let innerObj = getDivWithClass("row");
+    let rowElement = getDivWithClass("row");
     galleryObject.forEach(element => {
-        let colChild = getDivWithClass("col-md-4");
-        let cardObj = getDivWithClass("card");
-        cardObj.id = element.id;
-        let imgObj = document.createElement("img");
-        imgObj.src = element.url;
-        imgObj.className = "card-img-top";
-        imgObj.alt = element.name;
-        cardObj.appendChild(imgObj);
-        let cardBodyObj = getDivWithClass("card-body");
-        let cardBodyTextObj = document.createElement("p");
-        cardBodyTextObj.className = "card-text";
-        cardBodyTextObj.textContent = element.information;
-        cardBodyObj.appendChild(cardBodyTextObj);
-        cardObj.appendChild(cardBodyObj);
-        let cardFooterObj = getDivWithClass("card-footer");
-        cardFooterObj.appendChild(getButtonWithNameAndAttrs("EDIT", {
+        let columnElement = getDivWithClass("col-md-4");
+        let cardMain = getDivWithClass("card");
+        cardMain.id = element.id;
+        let cardImage = document.createElement("img");
+        cardImage.src = element.url;
+        cardImage.className = "card-img-top";
+        cardImage.alt = element.name;
+        cardMain.appendChild(cardImage);
+        let cardBody = getDivWithClass("card-body");
+        let cardBodyText = document.createElement("p");
+        cardBodyText.className = "card-text";
+        cardBodyText.textContent = element.information;
+        cardBody.appendChild(cardBodyText);
+        cardMain.appendChild(cardBody);
+        let cardFooter = getDivWithClass("card-footer");
+        cardFooter.appendChild(getButton("EDIT", {
             "class": "btn btn-primary",
             "data-toggle": "modal",
             "data-target": "#editModal",
             "data-id": element.id,
             "data-type": "edit"
         }))
-        cardFooterObj.appendChild(getButtonWithNameAndAttrs("DELETE", {
+        cardFooter.appendChild(getButton("DELETE", {
             "class": "btn btn-danger float-right",
             "data-toggle": "modal",
             "data-target": "#deleteModal",
             "data-id": element.id
         }))
-        cardObj.appendChild(cardFooterObj);
-        colChild.appendChild(cardObj);
-        innerObj.appendChild(colChild);
+        cardMain.appendChild(cardFooter);
+        columnElement.appendChild(cardMain);
+        rowElement.appendChild(columnElement);
     });
-    gallery_holder.appendChild(innerObj);
+    gallery_holder.appendChild(rowElement);
 }
 
 
@@ -85,16 +85,16 @@ date.addEventListener("input", function(event) {
     }
 });
 
-let imgUrl = document.getElementById("image-url");
+let imageSource = document.getElementById("image-url");
 
-imgUrl.addEventListener("input", function(event) {
-    console.log(imgUrl.validity);
-    if (imgUrl.validity.patternMismatch) {
+imageSource.addEventListener("input", function(event) {
+    console.log(imageSource.validity);
+    if (imageSource.validity.patternMismatch) {
         //console.log("inside1")
-        imgUrl.setCustomValidity("Please provide a valid URL.");
+        imageSource.setCustomValidity("Please provide a valid URL.");
     } else {
         //console.log("inside")
-        imgUrl.setCustomValidity("");
+        imageSource.setCustomValidity("");
     }
 });
 
@@ -121,11 +121,7 @@ $('#editModal').on('show.bs.modal', function(event) {
     var modal = $(this)
     if (object) {
         var date = new Date(object.date);
-        console.log(date)
-        /*var day = ("0" + date.getDate()).slice(-2);
-        var month = ("0" + (date.getMonth() + 1)).slice(-2);
-        var date_formatted = date.getFullYear() + "/" + (month) + "/" + (day);
-        console.log(date_formatted)*/
+        console.log(date);
         modal.find("#image-id").val(object.id);
         modal.find("#image-name").val(object.name)
         modal.find("#image-url").val(object.url)
@@ -148,7 +144,6 @@ $("#editForm").submit(function(event) {
     const information = $("#image-information").val();
     const date = $("#image-date").val();
     const url = $("#image-url").val();
-    //console.log(id, name, information, date)
     galleryObject.map(obj => {
         if (obj.id == id) {
             obj.name = name;
